@@ -10,6 +10,8 @@ import Person from "@material-ui/icons/Person";
 import Phone from "@material-ui/icons/Phone";
 import Location from "@material-ui/icons/LocationOn";
 import Fingerprint from "@material-ui/icons/Fingerprint";
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+
 // core components
 import Header from "components/Header/Header.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
@@ -35,6 +37,10 @@ import loginPageStyle from "assets/jss/material-kit-react/views/loginPage.jsx";
 import mel from "assets/img/Mel.jpg"
 //Connection with redux
 import { connect } from "react-redux";
+
+// react components for routing our app without refresh
+import { Link } from "react-router-dom";
+
 //
 import { registerUser } from "../../actions/authActions";
 //React router for wrapping the page
@@ -109,7 +115,25 @@ class RegisterPage extends React.Component {
     this.setState({ demential_stage: event.target.value });
   };
 
+  renderButtonComplete() {
+    return <div style={{textAlign: "right"}}>
+      
+      <Button
+        component={Link}
+        color="success"
+        size="lg"
+        to="/"
+        justIcon 
+        round
+      >
+        <ExitToAppIcon  style={{width: "60px", height: "60px", marginRight: "3px"}}  />
+      </Button>
+      <br />
 
+      <br />
+      <br />
+    </div>
+  }
 
   validateInfo() {
     var validate = true
@@ -450,6 +474,9 @@ class RegisterPage extends React.Component {
                 </Card>
               </GridItem>
             </GridContainer>
+
+            {this.renderButtonComplete()}
+            
           </div>
         </div>
       </div>

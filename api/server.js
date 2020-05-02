@@ -3,8 +3,8 @@ var mongoose = require('mongoose');
 const app = require('./app');
 
 //Connection to a database
-
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/memento', { useNewUrlParser: true } )
+//mongodb+srv://Nathalia:admin@cluster0-sxjux.mongodb.net/test?retryWrites=true&w=majority
+mongoose.connect('mongodb://localhost/memento', { useNewUrlParser: true } )
   .then(db  =>  console.log('BD is connected'))
   .catch(err =>  console.log(err));
 

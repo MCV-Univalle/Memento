@@ -90,6 +90,10 @@ export const logoutUser = () => dispatch => {
   dispatch({
     type: DELETE_USER_QUESTIONS
    }) 
+   // Delete relations
+  dispatch({
+    type: DELETE_USER_RELATIONS
+   }) 
   // Remove auth header for future requests
   setAuthToken(false);
   // Set current user to empty object {} which will set isAuthenticated to false

@@ -9,8 +9,8 @@ import { Provider } from "react-redux";
 import {persistor, store} from "./store";
 import { PersistGate } from 'redux-persist/lib/integration/react';
 
+// private route for login
 import PrivateRoute from "./views/LoginPage/PrivateRoute";
-
 
 import "assets/scss/material-kit-react.scss?v=1.7.0";
 
@@ -32,6 +32,7 @@ import SpatialOptionsPage from "views/SpatialOptionsPage/SpatialOptionsPage"
 import IdentificationPage from "views/IdentificationPage/IdentificationPage"
 import OrientationPage from "views/OrientationPage/OrientationPage"
 import QuizAlbumPage from "views/QuizAlbumPage/QuizAlbumPage"
+import CalculusPage from "views/CalculusPage/CalculusPage"
 
 var hist = createBrowserHistory();
 
@@ -55,8 +56,6 @@ if (localStorage.jwtToken) {
   }
 }
 
-
-
 ReactDOM.render(
   <Provider store={store}>
      <PersistGate loading={null} persistor={persistor}>
@@ -76,6 +75,7 @@ ReactDOM.render(
           <PrivateRoute exact path="/upload-imageProfile-person-page" component={UploadProfilePage}/>
           <PrivateRoute exact path="/identification-page" component={IdentificationPage} />
           <PrivateRoute exact path="/orientation-page" component={OrientationPage} />
+          <PrivateRoute exact path="/calculus-page" component={CalculusPage} />
           <PrivateRoute exact path="/quiz-album-page" component={QuizAlbumPage} />
           <PrivateRoute exact path="/profile-page" component={ProfilePage} />
           <Route path="/" component={MementoLandingPage} />

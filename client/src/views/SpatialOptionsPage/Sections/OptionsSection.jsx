@@ -56,10 +56,15 @@ class OptionsSection extends React.Component {
                 </Button>
               </div>
               <div>
-                <Button size="lg" style={{ width: "230px" }} color="success"> Atención y calculo </Button>
-              </div>
-              <div>
-                <Button size="lg" style={{ width: "230px" }} color="success"> Lenguaje </Button>
+                <Button 
+                size="lg" 
+                style={{ width: "230px" }} 
+                color="success"
+                component={Link}
+                to="/calculus-page"
+                > 
+                Atención y calculo 
+                </Button>
               </div>
 
 

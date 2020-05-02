@@ -96,7 +96,8 @@ class ProfilePage extends React.Component {
   }
 
   returnImgActual(img){
-    if(img==null){
+    console.log(typeof(img))
+    if(img==null || img == ""){
       return profileDefaultImg
     }
     else return "../../../../../../" + img
@@ -146,12 +147,11 @@ class ProfilePage extends React.Component {
                         return this.renderQuestion(question,key);
                       })} */}
                     </div>
+                    {this.renderButtonComplete()}
 
-
-                {questions.length === 0 ? this.renderButtonComplete() : "jkfjg"}
+                {/* {questions.length === 0 ? this.renderButtonComplete() : "jkfjg"} */}
                   </div>
                 </GridItem>
-
                
               </GridContainer>
             </div>

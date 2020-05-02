@@ -7,6 +7,8 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
 import Fingerprint from "@material-ui/icons/Fingerprint";
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+
 // core components
 import Header from "components/Header/Header.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
@@ -30,6 +32,9 @@ import image from "assets/img/hola.jpeg";
 
 //Redux
 import { connect } from "react-redux";
+
+// react components for routing our app without refresh
+import { Link } from "react-router-dom";
 
 //Front and backend
 import { loginUser } from "../../actions/authActions";
@@ -102,6 +107,26 @@ class LoginPage extends React.Component {
     }
 
     return validate
+  }
+
+  renderButtonComplete() {
+    return <div style={{textAlign: "right"}}>
+      
+      <Button
+        component={Link}
+        color="success"
+        size="lg"
+        to="/"
+        justIcon 
+        round
+      >
+        <ExitToAppIcon  style={{width: "60px", height: "60px", marginRight: "3px"}}  />
+      </Button>
+      <br />
+
+      <br />
+      <br />
+    </div>
   }
 
   errorNotification = () => {
@@ -221,6 +246,7 @@ class LoginPage extends React.Component {
               </GridItem>
             </GridContainer>
 
+            {this.renderButtonComplete()}
           </div>
         </div>
       </div>
