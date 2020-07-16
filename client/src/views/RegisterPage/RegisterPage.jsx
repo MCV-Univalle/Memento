@@ -10,7 +10,7 @@ import Person from "@material-ui/icons/Person";
 import Phone from "@material-ui/icons/Phone";
 import Location from "@material-ui/icons/LocationOn";
 import Fingerprint from "@material-ui/icons/Fingerprint";
-import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 // core components
 import Header from "components/Header/Header.jsx";
@@ -28,13 +28,13 @@ import RadioInput from "components/CustomInput/RadioInput.jsx";
 import Datetime from "react-datetime";
 
 //library to show notifications
-import swal from 'sweetalert';
+import swal from "sweetalert";
 
 //Styles of login using in  the page too
 import loginPageStyle from "assets/jss/material-kit-react/views/loginPage.jsx";
 //Font of the page
 //import image from "assets/img/cute.jpeg";
-import mel from "assets/img/Mel.jpg"
+import mel from "assets/img/Mel.jpg";
 //Connection with redux
 import { connect } from "react-redux";
 
@@ -47,7 +47,6 @@ import { registerUser } from "../../actions/authActions";
 import { withRouter } from "react-router-dom";
 //classnames
 import classnames from "classnames";
-
 
 class RegisterPage extends React.Component {
   constructor(props) {
@@ -71,16 +70,16 @@ class RegisterPage extends React.Component {
       errorPhone: false,
       errorPassword: false,
       errorEqualpassword: false,
-      errors: {}
+      errors: {},
     };
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({
-        errors: nextProps.errors
+        errors: nextProps.errors,
       });
-      this.errorNotificationBack(nextProps.errors.msg)
+      this.errorNotificationBack(nextProps.errors.msg);
     }
   }
 
@@ -90,92 +89,94 @@ class RegisterPage extends React.Component {
       text: msg,
       icon: "error",
       button: "Reintentar",
-    })
-  }
+    });
+  };
 
   componentDidMount() {
     // we add a hidden class to the card and after 300 ms we delete it and the transition appears
     setTimeout(
-      function () {
+      function() {
         this.setState({ cardAnimaton: "" });
       }.bind(this),
       300
     );
   }
 
-  onChange = e => {
+  onChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
   };
 
-  onChangeExa = date => {
-    this.setState({ date: date.format('YYYY-MM-DD') });
+  onChangeExa = (date) => {
+    this.setState({ date: date.format("YYYY-MM-DD") });
   };
 
-  handleChangeEnabled = event => {
+  handleChangeEnabled = (event) => {
     this.setState({ demential_stage: event.target.value });
   };
 
   renderButtonComplete() {
-    return <div style={{textAlign: "right"}}>
-      
-      <Button
-        component={Link}
-        color="success"
-        size="lg"
-        to="/"
-        justIcon 
-        round
-      >
-        <ExitToAppIcon  style={{width: "60px", height: "60px", marginRight: "3px"}}  />
-      </Button>
-      <br />
+    return (
+      <div style={{ textAlign: "right" }}>
+        <Button
+          component={Link}
+          color="success"
+          size="lg"
+          to="/"
+          justIcon
+          round
+        >
+          <ExitToAppIcon
+            style={{ width: "60px", height: "60px", marginRight: "3px" }}
+          />
+        </Button>
+        <br />
 
-      <br />
-      <br />
-    </div>
+        <br />
+        <br />
+      </div>
+    );
   }
 
   validateInfo() {
-    var validate = true
+    var validate = true;
     if (this.state.name === "") {
       this.setState({ errorName: true });
-      validate = false
+      validate = false;
     }
 
     if (this.state.last_name === "") {
       this.setState({ errorLast_name: true });
-      validate = false
+      validate = false;
     }
 
     if (this.state.cc === 0) {
       this.setState({ errorcc: true });
-      validate = false
+      validate = false;
     }
 
     if (this.state.adress === "") {
       this.setState({ errorAdress: true });
-      validate = false
+      validate = false;
     }
 
     if (this.state.phone === 0) {
       this.setState({ errorPhone: true });
-      validate = false
+      validate = false;
     }
 
     if (this.state.password === "") {
       this.setState({ errorPassword: true });
-      validate = false
+      validate = false;
     }
 
     if (this.state.equalpassword === "") {
       this.setState({ errorEqualpassword: true });
-      validate = false
+      validate = false;
     }
-    if (this.state.demential_stage === "" ||
-      this.state.date === "") {
-      validate = false
+    if (this.state.demential_stage === "" || this.state.date === "") {
+      validate = false;
     }
-    return validate
+    return validate;
   }
 
   errorNotification = () => {
@@ -184,8 +185,8 @@ class RegisterPage extends React.Component {
       text: "Completa todo el formulario",
       icon: "error",
       button: "Reintentar",
-    })
-  }
+    });
+  };
 
   errorNotificationEqualPass = () => {
     swal({
@@ -193,8 +194,8 @@ class RegisterPage extends React.Component {
       text: "Verifica y vuelve a intentarlo",
       icon: "error",
       button: "Reintentar",
-    })
-  }
+    });
+  };
 
   errorLengthPass = () => {
     swal({
@@ -202,33 +203,33 @@ class RegisterPage extends React.Component {
       text: "Verifica y vuelve a intentarlo",
       icon: "error",
       button: "Reintentar",
-    })
-  }
+    });
+  };
 
   validateLength() {
-    var limit = true
+    var limit = true;
     if (this.state.password.length < 8) {
-      limit = false
+      limit = false;
     }
-    return limit
+    return limit;
   }
 
   validateEqualPass() {
-    var equal = true
+    var equal = true;
     if (this.state.password !== this.state.equalpassword) {
-      equal = false
+      equal = false;
     }
-    return equal
+    return equal;
   }
 
-  verifyDate = current => {
-    var yesterday = Datetime.moment().subtract(1, 'day')
-    return current.isBefore( yesterday );
-  }
+  verifyDate = (current) => {
+    var yesterday = Datetime.moment().subtract(1, "day");
+    return current.isBefore(yesterday);
+  };
 
-  onSubmit = e => {
+  onSubmit = (e) => {
     e.preventDefault();
-    var valit = this.validateInfo()
+    var valit = this.validateInfo();
 
     if (valit) {
       if (this.validateEqualPass()) {
@@ -242,25 +243,19 @@ class RegisterPage extends React.Component {
             password: this.state.password,
             dementia_stage: this.state.demential_stage,
             birthdate: this.state.date,
-            profileImg: ""
+            profileImg: "",
           };
 
-          this.props.registerUser(newUser, this.props.history); 
-        }
-        else {
+          this.props.registerUser(newUser, this.props.history);
+        } else {
           this.errorLengthPass();
         }
-
-      }
-      else {
+      } else {
         this.errorNotificationEqualPass();
       }
-
-    }
-    else {
+    } else {
       this.errorNotification();
     }
-
   };
 
   render() {
@@ -286,19 +281,25 @@ class RegisterPage extends React.Component {
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={5}>
                 <Card className={classes[this.state.cardAnimaton]}>
-                  <form className={classes.form} noValidate onSubmit={this.onSubmit}>
+                  <form
+                    className={classes.form}
+                    noValidate
+                    onSubmit={this.onSubmit}
+                  >
                     <CardHeader color="info" className={classes.cardHeader}>
                       <h4 className={classes.subtitle}> Registrate</h4>
                     </CardHeader>
                     <CardBody>
-                      <h4 className={classes.lineSubtitle}>Información basica</h4>
+                      <h4 className={classes.lineSubtitle}>
+                        Información basica
+                      </h4>
                       <CustomInput
                         value={this.state.name}
                         labelText="Nombre(s)"
                         id="name"
                         error={this.state.errorName}
                         formControlProps={{
-                          fullWidth: true
+                          fullWidth: true,
                         }}
                         inputProps={{
                           type: "text",
@@ -307,7 +308,7 @@ class RegisterPage extends React.Component {
                             <InputAdornment position="end">
                               <Person className={classes.inputIconsColor} />
                             </InputAdornment>
-                          )
+                          ),
                         }}
                       />
                       <CustomInput
@@ -316,7 +317,7 @@ class RegisterPage extends React.Component {
                         id="last_name"
                         error={this.state.errorLast_name}
                         formControlProps={{
-                          fullWidth: true
+                          fullWidth: true,
                         }}
                         inputProps={{
                           type: "text",
@@ -325,7 +326,7 @@ class RegisterPage extends React.Component {
                             <InputAdornment position="end">
                               <Person className={classes.inputIconsColor} />
                             </InputAdornment>
-                          )
+                          ),
                         }}
                       />
                       <CustomInput
@@ -334,16 +335,18 @@ class RegisterPage extends React.Component {
                         id="cc"
                         error={this.state.errorcc}
                         formControlProps={{
-                          fullWidth: true
+                          fullWidth: true,
                         }}
                         inputProps={{
                           type: "number",
                           onChange: this.onChange,
                           endAdornment: (
                             <InputAdornment position="end">
-                              <Fingerprint className={classes.inputIconsColor} />
+                              <Fingerprint
+                                className={classes.inputIconsColor}
+                              />
                             </InputAdornment>
-                          )
+                          ),
                         }}
                       />
                       <CustomInput
@@ -352,10 +355,10 @@ class RegisterPage extends React.Component {
                         id="adress"
                         error={this.state.errorAdress}
                         className={classnames("", {
-                          invalid: errors.adress
+                          invalid: errors.adress,
                         })}
                         formControlProps={{
-                          fullWidth: true
+                          fullWidth: true,
                         }}
                         inputProps={{
                           type: "text",
@@ -364,7 +367,7 @@ class RegisterPage extends React.Component {
                             <InputAdornment position="end">
                               <Location className={classes.inputIconsColor} />
                             </InputAdornment>
-                          )
+                          ),
                         }}
                       />
                       <CustomInput
@@ -373,7 +376,7 @@ class RegisterPage extends React.Component {
                         id="phone"
                         error={this.state.errorPhone}
                         formControlProps={{
-                          fullWidth: true
+                          fullWidth: true,
                         }}
                         inputProps={{
                           type: "number",
@@ -382,7 +385,7 @@ class RegisterPage extends React.Component {
                             <InputAdornment position="end">
                               <Phone className={classes.inputIconsColor} />
                             </InputAdornment>
-                          )
+                          ),
                         }}
                       />
                       <CustomInput
@@ -391,7 +394,7 @@ class RegisterPage extends React.Component {
                         id="password"
                         error={this.state.errorPassword}
                         formControlProps={{
-                          fullWidth: true
+                          fullWidth: true,
                         }}
                         inputProps={{
                           type: "password",
@@ -403,7 +406,7 @@ class RegisterPage extends React.Component {
                               </Icon>
                             </InputAdornment>
                           ),
-                          autoComplete: "off"
+                          autoComplete: "off",
                         }}
                       />
                       <CustomInput
@@ -412,7 +415,7 @@ class RegisterPage extends React.Component {
                         id="equalpassword"
                         error={this.state.errorEqualpassword}
                         formControlProps={{
-                          fullWidth: true
+                          fullWidth: true,
                         }}
                         inputProps={{
                           type: "password",
@@ -424,7 +427,7 @@ class RegisterPage extends React.Component {
                               </Icon>
                             </InputAdornment>
                           ),
-                          autoComplete: "off"
+                          autoComplete: "off",
                         }}
                       />
                       <br />
@@ -437,14 +440,15 @@ class RegisterPage extends React.Component {
                         closeOnSelect={true}
                         inputProps={{
                           placeholder: "Fecha de nacimiento",
-                          style: { fontFamily: '"Nunito", "Roboto"' }
-
+                          style: { fontFamily: '"Nunito", "Roboto"' },
                         }}
                       />
                       <br />
                       <br />
 
-                      <h4 className={classes.lineSubtitle}>Estado de la demencia</h4>
+                      <h4 className={classes.lineSubtitle}>
+                        Estado de la demencia
+                      </h4>
 
                       <RadioInput
                         checked={this.state.demential_stage === "Inicial"}
@@ -459,14 +463,9 @@ class RegisterPage extends React.Component {
                         value="Moderada"
                         label="Moderada"
                       ></RadioInput>
-
                     </CardBody>
                     <CardFooter className={classes.cardFooter}>
-                      <Button
-                        simple color="info"
-                        size="lg"
-                        type="submit"
-                      >
+                      <Button simple color="info" size="lg" type="submit">
                         Registrar paciente
                       </Button>
                     </CardFooter>
@@ -476,7 +475,6 @@ class RegisterPage extends React.Component {
             </GridContainer>
 
             {this.renderButtonComplete()}
-            
           </div>
         </div>
       </div>
@@ -488,15 +486,15 @@ RegisterPage.propTypes = {
   classes: PropTypes.object,
   registerUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
 });
-
 
 export default connect(
   mapStateToProps,
-  { registerUser })(withStyles(loginPageStyle)(withRouter(RegisterPage)));
+  { registerUser }
+)(withStyles(loginPageStyle)(withRouter(RegisterPage)));

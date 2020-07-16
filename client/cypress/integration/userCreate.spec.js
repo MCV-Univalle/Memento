@@ -1,0 +1,16 @@
+describe("create user", () => {
+    it("sign in", () => {
+        cy.visit("/register-page")
+        cy.get('#name').type("Camila")
+        cy.get('#last_name').type("Lopez")
+        cy.get('#cc').type("77777788")
+        cy.get('#phone').type("31568949")
+        cy.get('#adress').type("Cra 20 #13-15")
+        cy.get('#password').type("123456789")
+        cy.get('#equalpassword').type("123456789")
+        cy.get('.form-control').click()
+        cy.get('[data-value="12"]').click()
+        cy.get(':nth-child(15) > .RadioInput-container-318 > .MuiFormControlLabel-root > .MuiButtonBase-root > .MuiIconButton-label > .PrivateSwitchBase-input-361').check()
+        cy.get('.CardFooter-cardFooter-401 > .MuiButtonBase-root').click()
+    })
+})

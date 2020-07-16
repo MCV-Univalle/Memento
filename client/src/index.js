@@ -33,6 +33,7 @@ import IdentificationPage from "views/IdentificationPage/IdentificationPage"
 import OrientationPage from "views/OrientationPage/OrientationPage"
 import QuizAlbumPage from "views/QuizAlbumPage/QuizAlbumPage"
 import CalculusPage from "views/CalculusPage/CalculusPage"
+import PuzzlePage from "views/PuzzlePage/PuzzlePage"
 
 var hist = createBrowserHistory();
 
@@ -77,6 +78,7 @@ ReactDOM.render(
           <PrivateRoute exact path="/orientation-page" component={OrientationPage} />
           <PrivateRoute exact path="/calculus-page" component={CalculusPage} />
           <PrivateRoute exact path="/quiz-album-page" component={QuizAlbumPage} />
+          <PrivateRoute exact path="/puzzle-page" component={PuzzlePage} />
           <PrivateRoute exact path="/profile-page" component={ProfilePage} />
           <Route path="/" component={MementoLandingPage} />
         </Switch>

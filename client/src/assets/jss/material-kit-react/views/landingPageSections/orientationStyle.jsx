@@ -1,6 +1,5 @@
 import { title } from "assets/jss/material-kit-react.jsx";
 
-
 const activityStyle = {
   title: {
     ...title,
@@ -17,7 +16,6 @@ const activityStyle = {
     width: "100%",
     maxWidth: "25%",
   },
-  
 };
 
 export default activityStyle;

@@ -19,13 +19,13 @@ import GridItem from "components/Grid/GridItem.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
 import Button from "components/CustomButtons/Button.jsx";
-import moment from 'moment'
+import moment from "moment";
 
 //library to show notifications
-import swal from 'sweetalert';
+import swal from "sweetalert";
 
 // Material icons
-import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
+import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 
 // react components for routing our app without refresh
 import { Link } from "react-router-dom";
@@ -36,21 +36,37 @@ import profileDefaultImg from "assets/img/faces/NotImage.png";
 import profilePageStyle from "assets/jss/material-kit-react/views/profilePage.jsx";
 
 class ProfilePage extends React.Component {
-
-
   componentDidMount() {
-    console.log(this.props.questions.flagQuestions)
-    if(!this.props.questions.flagQuestions){
-      this.props.fetchQuestions(this.props.auth.user.sub)
-      this.props.fetchRelations(this.props.auth.user.sub)
+    console.log(this.props.questions.flagQuestions);
+    if (!this.props.questions.flagQuestions) {
+      this.props.fetchQuestions(this.props.auth.user.sub);
+      this.props.fetchRelations(this.props.auth.user.sub);
     }
   }
 
   renderQuestion(question, key) {
-    return <div key={key}>
-      <h5>{question.question}</h5>
-      <p>{question.answer}</p>
-    </div>
+    return (
+      <div key={key}>
+        <h5>{question.question}</h5>
+        <p>{question.answer}</p>
+      </div>
+    );
+  }
+
+  capitalizeLetter = (name) =>{
+      if (typeof name !== 'string') return ''
+      name = name.split(" ");
+      var str = ""
+      var i;
+      for (i = 0; i < name.length; i++) {
+        var partName = name[i].charAt(0).toUpperCase() + name[i].slice(1)
+        if (name.length-1==i){
+          str = str + partName
+        }
+        else str = str + partName + " "
+      }
+
+      return str
   }
 
   imageClick = () => {
@@ -63,53 +79,52 @@ class ProfilePage extends React.Component {
         },
         defeat: false,
       },
-    })
-    .then((value) => {
+    }).then((value) => {
       if (value) {
-        this.redirectTo()
+        this.redirectTo();
       }
     });
-  }
+  };
 
   redirectTo = () => {
     this.props.history.push("/upload-imageProfile-person-page");
-  }
+  };
 
   renderButtonComplete() {
-    return <div style={{textAlign: "right"}}>
-      
-      <Button
-        component={Link}
-        color="success"
-        size="lg"
-        to="/activities-page"
-        justIcon 
-        round
-      >
-        <PlayCircleOutlineIcon  style={{width: "60px", height: "60px", marginRight: "3px"}}  />
-      </Button>
-      <br />
+    return (
+      <div style={{ textAlign: "right" }}>
+        <Button
+          component={Link}
+          color="success"
+          size="lg"
+          to="/activities-page"
+          justIcon
+          round
+        >
+          <PlayCircleOutlineIcon
+            style={{ width: "60px", height: "60px", marginRight: "3px" }}
+          />
+        </Button>
+        <br />
 
-      <br />
-      <br />
-    </div>
+        <br />
+        <br />
+      </div>
+    );
   }
 
-  returnImgActual(img){
-    console.log(typeof(img))
-    if(img==null || img == ""){
-      return profileDefaultImg
-    }
-    else return "../../../../../../" + img
+  returnImgActual(img) {
+    if (img == null || img == "") {
+      return profileDefaultImg;
+    } else return "../../../../../../" + img;
   }
-
 
   render() {
     const { userData } = this.props.auth;
     let momentob = new Date(userData.birthdate);
-    var age = moment().diff(momentob, 'years');
+    var age = moment().diff(momentob, "years");
     const { questions } = this.props.questions;
-    const imgPro = this.returnImgActual(userData.profileImg)
+    const imgPro = this.returnImgActual(userData.profileImg);
     const { classes, ...rest } = this.props;
     const imageClasses = classNames(
       classes.imgRaised,
@@ -125,7 +140,7 @@ class ProfilePage extends React.Component {
           fixed
           changeColorOnScroll={{
             height: 300,
-            color: "white"
+            color: "white",
           }}
           {...rest}
         />
@@ -137,11 +152,22 @@ class ProfilePage extends React.Component {
                 <GridItem xs={10} sm={10} md={9}>
                   <div className={classes.profile}>
                     <div>
-                      <img src={imgPro} alt="..." className={imageClasses} onClick={this.imageClick} style={{ "pointerEvents": "all" }} />
+                      <img
+                        src={imgPro}
+                        alt="..."
+                        className={imageClasses}
+                        onClick={this.imageClick}
+                        style={{ pointerEvents: "all", cursor: "pointer",}}
+                      />
                     </div>
                     <div className={classes.name}>
-                      <h2 className={classes.title}> {userData.name} {userData.last_name}</h2>
-                      <h4>Hola, soy {userData.name}, tengo {age} años. </h4>
+                      <h2 className={classes.title}>
+                        {" "}
+                        {userData.name} {userData.last_name}
+                      </h2>
+                      <h4>
+                        Hola, soy {this.capitalizeLetter(userData.name)}, tengo {age} años.{" "}
+                      </h4>
                       {/*  {questions.length !== 0 ? questions[0].score : ""} </h4> 
                       {questions.map((question,key)=>{
                         return this.renderQuestion(question,key);
@@ -149,10 +175,9 @@ class ProfilePage extends React.Component {
                     </div>
                     {this.renderButtonComplete()}
 
-                {/* {questions.length === 0 ? this.renderButtonComplete() : "jkfjg"} */}
+                    {/* {questions.length === 0 ? this.renderButtonComplete() : "jkfjg"} */}
                   </div>
                 </GridItem>
-               
               </GridContainer>
             </div>
           </div>
@@ -165,14 +190,15 @@ class ProfilePage extends React.Component {
 ProfilePage.propTypes = {
   classes: PropTypes.object,
   auth: PropTypes.object.isRequired,
-  questions: PropTypes.object.isRequired
+  questions: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
-  questions: state.questions
+  questions: state.questions,
 });
 
 export default connect(
   mapStateToProps,
-  {   fetchQuestions, fetchRelations })(withStyles(profilePageStyle)(withRouter(ProfilePage)));
+  { fetchQuestions, fetchRelations }
+)(withStyles(profilePageStyle)(withRouter(ProfilePage)));

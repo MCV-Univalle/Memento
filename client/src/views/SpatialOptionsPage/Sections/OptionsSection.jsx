@@ -66,6 +66,17 @@ class OptionsSection extends React.Component {
                 Atención y calculo 
                 </Button>
               </div>
+              <div>
+                <Button 
+                size="lg" 
+                style={{ width: "230px" }} 
+                color="success"
+                component={Link}
+                to="/puzzle-page"
+                > 
+                Rompecabezas
+                </Button>
+              </div>
 
 
             </GridItem>
