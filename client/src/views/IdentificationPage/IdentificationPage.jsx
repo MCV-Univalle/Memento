@@ -209,7 +209,9 @@ class IdentificationPage extends React.Component {
           <Button
               color="danger"
               size="lg"
-              style={{width:"280px"}}
+              style={{width:"280px",
+                backgroundColor: "#ff8080"
+              }}
               onClick={() => { this.areYouSure() }}>
               Terminar juego
           </Button>
